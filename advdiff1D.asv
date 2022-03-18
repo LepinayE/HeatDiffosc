@@ -17,7 +17,7 @@ function [x,T,ti] = advdiff1D(L,U) % Extract the first solution component as T.
 % Mesh over which PDE is solved
 w = 1;
 L = 10;
-ti =  linspace(0,2*pi/w,10); % time 0<t< pi/w
+ti =  linspace(0,2pi/w,10); % time 0<t< pi/w
 res = 50;
 x = linspace(0,L,res);
 
@@ -72,21 +72,10 @@ ylabel('Temp')
     function [pL,qL,pR,qR] = bcfun(xL,TL,xR,TR,t)
     % BCs at _L left boundary (injection) and _R right boundary (far field)
     % BCs take form p(x,t,T) + q(x,t)f(x,t,T,dTdx)= 0
-        if 0 <= ti < pi/w
-
-            pL =TL-1; 
-            qL = 0;
-            pR = TR-0.0001;
-            qR = 0;
-
-        elseif pi/w <= ti < 2pi/w
-            pL =0; 
-            qL = 1/k;
-            pR = TR-0.0001;
-            qR = 0;
-
-        end
-
+    pL =TL-1; 
+    qL = 0;
+    pR = TR-0.0001;
+    qR = 0;
     end
 
 
