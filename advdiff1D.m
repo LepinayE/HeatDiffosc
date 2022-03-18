@@ -12,18 +12,21 @@ Purely advective flux at origin during outflow:
 T_x  = 0 at x=0 for pi/w < t< 2pi /w
 %}
 
-function [x,T,t] = advdiff1D(L,U) % Extract the first solution component as T. 
+function [x,T,ti] = advdiff1D(L,U) % Extract the first solution component as T. 
 
 % Mesh over which PDE is solved
 w = 1;
 L = 10;
-t =  linspace(0,pi/w,10); % time 0<t< pi/w
+i = 1;
+ai = (i-1)*pi/w;
+bi = i*pi/w;
+ti =  linspace(ai,bi,10); % time 0<t< pi/w
 res = 50;
 x = linspace(0,L,res);
 
 
 m = 0; %symmetry none as injection in LHS
-sol = pdepe(m,@pdex1pde,@pdex1ic,@bcfun,x,t); % PDE solver
+sol = pdepe(m,@pdex1pde,@pdex1ic,@bcfun,x,ti); % PDE solver
 %{
  pdex1pde = PDE equation
  pdex1ic = initial conditions
@@ -42,7 +45,7 @@ ylabel('Temp')
 
 figure (2)
 hold on 
-plot(t,T)
+plot(ti,T)
 xlabel ('time')
 ylabel('Temp')
 
