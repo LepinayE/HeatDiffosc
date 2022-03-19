@@ -72,14 +72,18 @@ ylabel('Temp')
     function [pL,qL,pR,qR] = bcfun(xL,TL,xR,TR,t)
     % BCs at _L left boundary (injection) and _R right boundary (far field)
     % BCs take form p(x,t,T) + q(x,t)f(x,t,T,dTdx)= 0
-        if 0 <= ti < pi/w
+   
+        
+        if 0 <= ti  & ti < pi/w
 
             pL =TL-1; 
             qL = 0;
             pR = TR-0.0001;
             qR = 0;
 
-        elseif pi/w <= ti < 2pi/w
+        elseif pi/w <= ti & ti < 2*pi/w
+      
+            k=10
             pL =0; 
             qL = 1/k;
             pR = TR-0.0001;
